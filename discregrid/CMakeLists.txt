@@ -90,13 +90,6 @@ endif()
 # Eigen library.
 find_package(Eigen3 CONFIG REQUIRED)
 
-# Disable stupid MSVC compiler warnings.
-if(WIN32)
-	add_definitions(-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS)
-	add_definitions(-DNOMINMAX)
-	add_definitions(-D_USE_MATH_DEFINES)
-endif(WIN32)
-
 set(DISCREGRID_SOURCE_FILES
 	${HEADERS}
 	${SOURCES}
@@ -112,23 +105,40 @@ set(DISCREGRID_SOURCE_FILES
 )
 
 if(BUILD_AS_SHARED_LIBS)
-	add_library(Discregrid SHARED ${DISCREGRID_SOURCE_FILES})
+	add_library(Discregrid SHARED)
 else()
-	add_library(Discregrid ${DISCREGRID_SOURCE_FILES})
+	add_library(Discregrid)
 endif()
 
-# Discregrid has the following dependencies.
-#add_dependencies(Discregrid
-#)
+# Disable stupid MSVC compiler warnings.
+if(WIN32)
+	target_compile_definitions(Discregrid
+	PRIVATE
+		-D_SCL_SECURE_NO_WARNINGS
+		-D_CRT_SECURE_NO_WARNINGS
+		-DNOMINMAX
+		-D_USE_MATH_DEFINES
+	)
+endif(WIN32)
+
+target_sources(Discregrid 
+PRIVATE
+	${DISCREGRID_SOURCE_FILES}
+)
 
 # Set include directories.
 target_include_directories(Discregrid
 PUBLIC
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/Discregrid;${CMAKE_CURRENT_SOURCE_DIR}/include>  
-	$<INSTALL_INTERFACE:include/Discregrid;include>
+	$<BUILD_INTERFACE:
+		${CMAKE_CURRENT_LIST_DIR}/include/Discregrid
+		${CMAKE_CURRENT_LIST_DIR}/include
+	>
+	$<INSTALL_INTERFACE:
+		include/Discregrid
+		include
+	>
 PRIVATE
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../extern>
-	$<INSTALL_INTERFACE:../extern>
+	${CMAKE_CURRENT_LIST_DIR}/../extern
 )
 
 # Set link libraries.

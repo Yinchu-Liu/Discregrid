@@ -1,17 +1,7 @@
 # Eigen library.
 find_package(Eigen3 CONFIG REQUIRED)
 
-if(WIN32)
-	add_definitions(-D_SCL_SECURE_NO_WARNINGS)
-	add_definitions(-D_USE_MATH_DEFINES)
-endif(WIN32)
-
-add_executable(GenerateDensityMap
-	main.cpp
-	gauss_quadrature.hpp
-	gauss_quadrature.cpp
-	sph_kernel.hpp
-)
+add_executable(GenerateDensityMap)
 
 # OpenMP support.
 if(APPLE)
@@ -26,8 +16,24 @@ if(OPENMP_FOUND)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
+if(WIN32)
+	target_compile_definitions(GenerateDensityMap
+	PRIVATE
+		-D_SCL_SECURE_NO_WARNINGS
+		-D_USE_MATH_DEFINES
+	)
+endif(WIN32)
+
 add_dependencies(GenerateDensityMap
 	Discregrid
+)
+
+target_sources(GenerateDensityMap
+PRIVATE
+	main.cpp
+	gauss_quadrature.hpp
+	gauss_quadrature.cpp
+	sph_kernel.hpp
 )
 
 target_include_directories(GenerateDensityMap

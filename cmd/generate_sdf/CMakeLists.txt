@@ -5,11 +5,6 @@ configure_file("../resource_path.hpp.in" "${CMAKE_CURRENT_SOURCE_DIR}/resource_p
 # Eigen library.
 find_package(Eigen3 CONFIG REQUIRED)
 
-if(WIN32)
-	add_definitions(-D_SCL_SECURE_NO_WARNINGS)
-	add_definitions(-D_USE_MATH_DEFINES)
-endif(WIN32)
-
 # OpenMP support.
 if(APPLE)
 	include(PatchOpenMPApple)
@@ -23,14 +18,25 @@ if(OPENMP_FOUND)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
-add_executable(GenerateSDF
-	main.cpp
-	resource_path.hpp
-)
+add_executable(GenerateSDF)
+
+if(WIN32)
+	target_compile_definitions(GenerateSDF
+	PRIVATE
+		-D_SCL_SECURE_NO_WARNINGS
+		-D_USE_MATH_DEFINES
+	)
+endif(WIN32)
 
 add_dependencies(GenerateSDF
 	Discregrid
 )
+
+target_sources(GenerateSDF 
+PRIVATE 
+	main.cpp
+	resource_path.hpp
+	)
 
 target_include_directories(GenerateSDF
 PRIVATE

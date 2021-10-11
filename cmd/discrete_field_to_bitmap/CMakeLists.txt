@@ -1,11 +1,6 @@
 # Eigen library.
 find_package(Eigen3 CONFIG REQUIRED)
 
-if(WIN32)
-	add_definitions(-D_SCL_SECURE_NO_WARNINGS)
-	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-endif(WIN32)
-
 if ( CMAKE_COMPILER_IS_GNUCC )
     set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-multichar")
 endif ( CMAKE_COMPILER_IS_GNUCC )
@@ -23,14 +18,25 @@ if(OPENMP_FOUND)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
-add_executable(DiscreteFieldToBitmap
-	main.cpp
-	bmp_file.hpp
-	bmp_file.cpp
-)
+add_executable(DiscreteFieldToBitmap)
+
+if(WIN32)
+	target_compile_definitions(DiscreteFieldToBitmap 
+	PRIVATE
+		-D_SCL_SECURE_NO_WARNINGS 
+		-D_CRT_SECURE_NO_WARNINGS
+		)
+endif(WIN32)
 
 add_dependencies(DiscreteFieldToBitmap
 	Discregrid
+)
+
+target_sources(DiscreteFieldToBitmap
+PRIVATE
+	main.cpp
+	bmp_file.hpp
+	bmp_file.cpp
 )
 
 # Set include directories.
