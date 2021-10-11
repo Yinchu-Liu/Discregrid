@@ -39,13 +39,6 @@ PRIVATE
 	bmp_file.cpp
 )
 
-# Set include directories.
-target_include_directories(DiscreteFieldToBitmap
-PRIVATE
-	../../extern
-	../../discregrid/include
-)
-
 target_link_libraries(DiscreteFieldToBitmap
 PRIVATE
 	Discregrid

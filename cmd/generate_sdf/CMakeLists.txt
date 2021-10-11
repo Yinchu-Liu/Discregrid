@@ -36,12 +36,6 @@ target_sources(GenerateSDF
 PRIVATE 
 	main.cpp
 	resource_path.hpp
-	)
-
-target_include_directories(GenerateSDF
-PRIVATE
-	../../extern
-	../../discregrid/include
 )
 
 target_link_libraries(GenerateSDF

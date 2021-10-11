@@ -36,12 +36,6 @@ PRIVATE
 	sph_kernel.hpp
 )
 
-target_include_directories(GenerateDensityMap
-PRIVATE
-	../../extern
-	../../discregrid/include
-)
-
 target_link_libraries(GenerateDensityMap
 PRIVATE
 	Discregrid
