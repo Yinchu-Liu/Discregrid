@@ -3,14 +3,7 @@ set(RESOURCE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/resources/")
 configure_file("../resource_path.hpp.in" "${CMAKE_CURRENT_SOURCE_DIR}/resource_path.hpp")
 
 # Eigen library.
-find_package(Eigen3 REQUIRED)
-
-# Set include directories.
-include_directories(
-	../../extern
-	../../discregrid/include
-	${EIGEN3_INCLUDE_DIR}
-)
+find_package(Eigen3 CONFIG REQUIRED)
 
 if(WIN32)
 	add_definitions(-D_SCL_SECURE_NO_WARNINGS)
@@ -39,8 +32,16 @@ add_dependencies(GenerateSDF
 	Discregrid
 )
 
+target_include_directories(GenerateSDF
+PRIVATE
+	../../extern
+	../../discregrid/include
+)
+
 target_link_libraries(GenerateSDF
+PRIVATE
 	Discregrid
+	Eigen3::Eigen
 )
 
 set_target_properties(GenerateSDF PROPERTIES FOLDER Cmd)

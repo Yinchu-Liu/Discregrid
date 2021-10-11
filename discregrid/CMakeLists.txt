@@ -88,15 +88,7 @@ if(OPENMP_FOUND)
 endif()
 
 # Eigen library.
-find_package(Eigen3 REQUIRED)
-
-# Set include directories.
-include_directories(
-	include
-	include/Discregrid
-	${EIGEN3_INCLUDE_DIR}
-	../extern
-)
+find_package(Eigen3 CONFIG REQUIRED)
 
 # Disable stupid MSVC compiler warnings.
 if(WIN32)
@@ -129,8 +121,19 @@ endif()
 #add_dependencies(Discregrid
 #)
 
+# Set include directories.
+target_include_directories(Discregrid
+PUBLIC
+	include
+	include/Discregrid
+PRIVATE
+	../extern
+)
+
 # Set link libraries.
 target_link_libraries(Discregrid
+PUBLIC 
+	Eigen3::Eigen
 )
 
 install(TARGETS Discregrid

@@ -1,12 +1,5 @@
 # Eigen library.
-find_package(Eigen3 REQUIRED)
-
-# Set include directories.
-include_directories(
-	../../extern
-	../../discregrid/include
-	${EIGEN3_INCLUDE_DIR}
-)
+find_package(Eigen3 CONFIG REQUIRED)
 
 if(WIN32)
 	add_definitions(-D_SCL_SECURE_NO_WARNINGS)
@@ -37,8 +30,16 @@ add_dependencies(GenerateDensityMap
 	Discregrid
 )
 
+target_include_directories(GenerateDensityMap
+PRIVATE
+	../../extern
+	../../discregrid/include
+)
+
 target_link_libraries(GenerateDensityMap
+PRIVATE
 	Discregrid
+	Eigen3::Eigen
 )
 
 set_target_properties(GenerateDensityMap PROPERTIES FOLDER Cmd)
