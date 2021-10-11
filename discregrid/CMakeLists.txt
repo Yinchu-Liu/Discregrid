@@ -124,10 +124,11 @@ endif()
 # Set include directories.
 target_include_directories(Discregrid
 PUBLIC
-	include
-	include/Discregrid
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/Discregrid;${CMAKE_CURRENT_SOURCE_DIR}/include>  
+	$<INSTALL_INTERFACE:include/Discregrid;include>
 PRIVATE
-	../extern
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../extern>
+	$<INSTALL_INTERFACE:../extern>
 )
 
 # Set link libraries.
