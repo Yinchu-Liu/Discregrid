@@ -204,7 +204,7 @@ KDTree<HullType>::traverseBreadthFirst(TraversalQueue& pending,
 
         cb(n, d);
         auto is_pred = pred(n, d);
-        if (!node.is_leaf() && is_pred)
+        if (!node.isLeaf() && is_pred)
         {
             if (pless && !pless(node.children))
             {
