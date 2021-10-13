@@ -16,7 +16,7 @@ public:
 	TriangleMeshBSH(std::vector<Eigen::Vector3d> const& vertices,
 		std::vector<std::array<unsigned int, 3>> const& faces);
 
-	Eigen::Vector3d const& entityPosition(unsigned int i) const final;
+	Eigen::Vector3d entityPosition(unsigned int i) const final;
 	void computeHull(unsigned int b, unsigned int n, BoundingSphere& hull) const final;
 
 private:
@@ -36,7 +36,7 @@ public:
 	TriangleMeshBBH(std::vector<Eigen::Vector3d> const& vertices,
 		std::vector<std::array<unsigned int, 3>> const& faces);
 
-	Eigen::Vector3d const& entityPosition(unsigned int i) const final;
+	Eigen::Vector3d entityPosition(unsigned int i) const final;
 	void computeHull(unsigned int b, unsigned int n, Eigen::AlignedBox3d& hull) const final;
 
 private:
@@ -59,7 +59,7 @@ public:
 	PointCloudBSH();
 	PointCloudBSH(std::vector<Eigen::Vector3d> const& vertices);
 
-	Eigen::Vector3d const& entityPosition(unsigned int i) const final;
+	Eigen::Vector3d entityPosition(unsigned int i) const final;
 	void computeHull(unsigned int b, unsigned int n, BoundingSphere& hull)
 		const final;
 

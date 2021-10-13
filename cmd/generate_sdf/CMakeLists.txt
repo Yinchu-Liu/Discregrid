@@ -32,6 +32,11 @@ add_dependencies(GenerateSDF
 	Discregrid
 )
 
+target_include_directories(GenerateSDF 
+PRIVATE 
+	"${CMAKE_CURRENT_LIST_DIR}/../../extern"
+)
+
 target_sources(GenerateSDF 
 PRIVATE 
 	main.cpp

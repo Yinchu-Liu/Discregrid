@@ -23,7 +23,7 @@ TriangleMeshBSH::TriangleMeshBSH(
 		});
 }
 
-Vector3d const&
+Vector3d 
 TriangleMeshBSH::entityPosition(unsigned int i) const
 {
 	return m_tri_centers[i];
@@ -63,7 +63,7 @@ TriangleMeshBBH::TriangleMeshBBH(
 		});
 }
 
-Vector3d const&
+Vector3d 
 TriangleMeshBBH::entityPosition(unsigned int i) const
 {
 	return m_tri_centers[i];
@@ -94,7 +94,7 @@ PointCloudBSH::PointCloudBSH(std::vector<Vector3d> const& vertices)
 
 }
 
-Vector3d const&
+Vector3d 
 PointCloudBSH::entityPosition(unsigned int i) const
 {
 	return (*m_vertices)[i];

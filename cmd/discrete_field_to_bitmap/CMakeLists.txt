@@ -32,13 +32,16 @@ add_dependencies(DiscreteFieldToBitmap
 	Discregrid
 )
 
+target_include_directories(DiscreteFieldToBitmap 
+PRIVATE 
+	"${CMAKE_CURRENT_LIST_DIR}/../../extern"
+)
 target_sources(DiscreteFieldToBitmap
 PRIVATE
 	main.cpp
 	bmp_file.hpp
 	bmp_file.cpp
 )
-
 target_link_libraries(DiscreteFieldToBitmap
 PRIVATE
 	Discregrid
