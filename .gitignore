@@ -2,3 +2,4 @@
 resource_path.hpp
 *.*sdf
 build
+.vscode
