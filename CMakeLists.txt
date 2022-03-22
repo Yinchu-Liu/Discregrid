@@ -159,9 +159,6 @@ PRIVATE
 	"${CMAKE_CURRENT_LIST_DIR}/extern"
 )
 
-get_target_property(_discregrid_include_dirs Discregrid INTERFACE_INCLUDE_DIRECTORIES)
-message(STATUS "Discregrid interface include directories: ${_discregrid_include_dirs}")
-
 target_link_libraries(Discregrid
 PUBLIC 
 	Eigen3::Eigen

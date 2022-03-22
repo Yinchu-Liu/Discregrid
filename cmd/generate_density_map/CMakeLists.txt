@@ -28,6 +28,11 @@ add_dependencies(GenerateDensityMap
 	Discregrid
 )
 
+target_include_directories(GenerateDensityMap 
+PRIVATE 
+	"${CMAKE_CURRENT_LIST_DIR}/../../extern"
+)
+
 target_sources(GenerateDensityMap
 PRIVATE
 	main.cpp

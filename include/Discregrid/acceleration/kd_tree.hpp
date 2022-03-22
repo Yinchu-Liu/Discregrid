@@ -77,7 +77,7 @@ namespace Discregrid
 
         HullType &hull(unsigned int i) { return m_hulls[i]; }
 
-        virtual Eigen::Vector3d const &entityPosition(unsigned int i) const = 0;
+        virtual Eigen::Vector3d entityPosition(unsigned int i) const = 0;
         virtual void computeHull(unsigned int b, unsigned int n, HullType &hull) const = 0;
 
     protected:
